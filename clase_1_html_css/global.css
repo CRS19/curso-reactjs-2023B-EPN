@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, Helvetica, Arial;
+}
+
+.nav-principal {
+  display: flex;
+  flex-direction: row;
+  justify-content: "space-between";
+  background-color: black;
+  color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.nav-secundary {
+  display: flex;
+  flex-direction: column;
+  justify-content: "space-between";
+  align-items: center;
+  background-color: #fcfcfb;
+  color: black;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eeeeee;
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 50%;
+  margin: 0;
+}
+
+.ul-login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50%;
+  margin: 0;
+  margin-right: 30px;
+}
+
+.ul-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0;
+  width: 100%;
+}
+
+li {
+  display: flex;
+  margin-left: 5px;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 20px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.li-nav-secundaria {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 20%;
+}
+
+.li-nav-secundaria:hover {
+  background-color: white;
+  color: #545454;
+}
+
+li:hover {
+  background-color: rgb(51, 51, 51);
+}
+
+button {
+  display: flex;
+  background-color: black;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  width: 50%;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: rgb(51, 51, 51);
+}
+
+section {
+  position: relative;
+  background-image: url(https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_834,h_469/v1653688498/assets/2c/3833ca-a2eb-4da4-9879-51193ea88f87/original/DotCom_Update_Earner_bg_med2x.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 700px;
+}
+
+article {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 47%;
+  left: 40px;
+  top: 40px;
+  background-color: white;
+}
+
+h1 {
+  display: flex;
+  font-size: 52px;
+  margin: 0;
+}
+
+.card-link {
+  display: flex;
+  margin-top: 20px;
+  text-decoration: underline;
+}
+
+p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 48px;
+}
