@@ -6,7 +6,7 @@ import { PokemonList } from "./constants/PokemonList";
 function App() {
   return (
     <>
-      <h1>useState hook - ESTA DEPLOYADO!!</h1>
+      <h1>useState hook - ESTA DEPLOYADO!! x2</h1>
 
       <Contador />
 
