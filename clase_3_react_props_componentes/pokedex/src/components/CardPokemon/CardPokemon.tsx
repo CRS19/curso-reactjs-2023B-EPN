@@ -11,9 +11,11 @@ export const CardPokemon = ({ name, id, imgUrl, types }: IPokemon) => {
       case "Grass":
         return "#629869";
       case "Fire":
-        return "red";
+        return "#E3866E";
       case "Water":
-        return "blue";
+        return "#A4B4D6";
+      case "Bug":
+        return "#FBE597";
       default:
         return "white";
     }
