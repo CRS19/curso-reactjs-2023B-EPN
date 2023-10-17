@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { get, isEmpty } from "lodash";
-import { useEffect } from "react";
 
 export const Login = () => {
   const loginForm = useForm({ mode: "onBlur" });
@@ -18,12 +17,6 @@ export const Login = () => {
       );
     }
   };
-
-  useEffect(() => {
-    //loginForm.trigger();
-
-    console.log(loginForm.getValues("firstName"));
-  }, [loginForm.watch()]);
 
   return (
     <div>
