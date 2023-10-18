@@ -7,6 +7,7 @@ import { NotFound } from "./Pages/Home/404/NotFound.tsx";
 import { NavBar } from "./components/NavBar/NavBar.tsx";
 import { PokemonDetail } from "./components/PokemonDetail/PokemonDetail.tsx";
 import { Login } from "./Pages/Login/Login.tsx";
+import { Register } from "./Pages/Register/Register.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/:id",
     element: <PokemonDetail />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
     errorElement: <NotFound />,
   },
 ]);

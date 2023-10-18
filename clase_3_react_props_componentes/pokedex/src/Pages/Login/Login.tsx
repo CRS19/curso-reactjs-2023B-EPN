@@ -1,9 +1,15 @@
 import { useForm } from "react-hook-form";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { get, isEmpty } from "lodash";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../Firebase";
+import { useEffect } from "react";
+import { IAppState, useAppStore } from "../../Storage/Storage";
 
 export const Login = () => {
   const loginForm = useForm({ mode: "onBlur" });
+
+  const { loading, setLoading } = useAppStore((state: IAppState) => state);
 
   const onSubmit = () => {
     loginForm.trigger();
@@ -11,12 +17,30 @@ export const Login = () => {
     console.log(loginForm.formState.isValid);
 
     if (loginForm.formState.isValid) {
-      console.log(
-        "llamar al api de autenciacion con estos valores",
-        loginForm.getValues()
-      );
+      setLoading(true);
+      signInWithEmailAndPassword(
+        auth,
+        loginForm.getValues("firstName"),
+        loginForm.getValues("password")
+      )
+        .then((response) => {
+          // nunca se ejecuta cuando la promesa falla 4xx 5xx
+          console.log("response", response.user);
+
+          sessionStorage.setItem("user", JSON.stringify(response.user));
+          setLoading(false);
+        })
+        .catch((error) => {
+          // se ejecuta cuando la promesa falla 4xx 5xx
+          console.log("error", error);
+          setLoading(false);
+        });
     }
   };
+
+  useEffect(() => {
+    console.log("el objeto auth", auth);
+  }, []);
 
   return (
     <div>
@@ -25,10 +49,6 @@ export const Login = () => {
       <input
         {...loginForm.register("firstName", {
           required: "Este campo es requerido.",
-          pattern: {
-            value: /^[A-Za-z]+$/i,
-            message: "Porfavor solo ingresa letras.",
-          },
         })}
         style={{
           display: "flex",
@@ -67,26 +87,30 @@ export const Login = () => {
           {get(loginForm, "formState.errors.password.message", "") as string}
         </p>
       )}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <button
+      {!loading ? (
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            padding: "10px",
-            marginTop: "10px",
           }}
-          onClick={onSubmit}
         >
-          Login
-        </button>
-      </div>
+          <button
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "10px",
+              marginTop: "10px",
+            }}
+            onClick={onSubmit}
+          >
+            Login
+          </button>
+        </div>
+      ) : (
+        <div>loading...</div>
+      )}
     </div>
   );
 };
