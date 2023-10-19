@@ -13,6 +13,9 @@ export const CardContainerStyles: React.CSSProperties = {
 export const ImgStyles: React.CSSProperties = {
   backgroundColor: "#f2f2f2",
   borderRadius: "10px 10px 0px 0px",
+  width: "100%",
+  maxWidth: "218px",
+  minWidth: "218px",
 };
 
 export const NameStyles: React.CSSProperties = {

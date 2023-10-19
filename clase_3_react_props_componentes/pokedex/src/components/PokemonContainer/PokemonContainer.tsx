@@ -2,9 +2,14 @@
 import { ChangeEvent } from "react";
 import { CardPokemon } from "../CardPokemon/CardPokemon";
 import { usePokemonContainer } from "./state/usePokemonContainer";
+import { PokemonApiResponse } from "../../Pages/Dashboard/interfaces/Dashboard.interfaces";
 
-export const PokemonContainer = () => {
-  const { setFilter, pokemonList } = usePokemonContainer();
+export interface IPokemonContainerProps {
+  listPokemons: PokemonApiResponse[];
+}
+
+export const PokemonContainer = ({ listPokemons }: IPokemonContainerProps) => {
+  const { setFilter, pokemonList } = usePokemonContainer(listPokemons);
 
   return (
     <div
@@ -19,14 +24,7 @@ export const PokemonContainer = () => {
         }}
       />
       {pokemonList.length !== 0 ? (
-        pokemonList.map((pokemon) => (
-          <CardPokemon
-            id={pokemon.id}
-            name={pokemon.name}
-            types={pokemon.types}
-            imgUrl={pokemon.imgUrl}
-          />
-        ))
+        pokemonList.map((pokemon) => <CardPokemon {...pokemon} />)
       ) : (
         <h3>Pokemones no encontrados</h3>
       )}

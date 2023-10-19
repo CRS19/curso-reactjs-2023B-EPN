@@ -1,32 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { IPokemon, PokemonListConst } from "../../../constants/PokemonList";
+import { PokemonApiResponse } from "../../../Pages/Dashboard/interfaces/Dashboard.interfaces";
 
-export const usePokemonContainer = () => {
-  const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
+export const usePokemonContainer = (listPokemons: PokemonApiResponse[]) => {
+  const [pokemonList, setPokemonList] =
+    useState<PokemonApiResponse[]>(listPokemons);
   const [filter, setFilter] = useState<string>("");
 
   useEffect(() => {
-    const filertPokemon = (type: string): IPokemon[] => {
-      return PokemonListConst.filter((pokemon) => {
+    const filertPokemon = (type: string): PokemonApiResponse[] => {
+      return listPokemons.filter((pokemon) => {
         const typesEnMayuscula = pokemon.types.map((type) =>
-          type.toUpperCase()
+          type.type.name.toUpperCase()
         );
 
         return typesEnMayuscula.includes(type.toUpperCase());
       });
-
-      /*if (type !== "") {
-        return PokemonListConst.filter(
-          (pokemon) => pokemon.name.toLowerCase() === type.toLowerCase()
-        );
-      }*/
-
-      return [];
     };
 
     if (pokemonList.length === 0 && filter === "") {
-      setPokemonList(PokemonListConst);
+      setPokemonList(listPokemons);
       return;
     }
 
@@ -35,9 +28,13 @@ export const usePokemonContainer = () => {
     }
 
     if (filter === "") {
-      setPokemonList(PokemonListConst);
+      setPokemonList(listPokemons);
     }
   }, [filter]);
+
+  useEffect(() => {
+    setPokemonList(listPokemons); // antes se cargaba por un archivo quemado
+  }, [listPokemons]);
 
   return {
     pokemonList,

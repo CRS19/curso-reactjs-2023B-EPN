@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { NotFound } from "./Pages/Home/404/NotFound.tsx";
@@ -8,11 +7,12 @@ import { NavBar } from "./components/NavBar/NavBar.tsx";
 import { PokemonDetail } from "./components/PokemonDetail/PokemonDetail.tsx";
 import { Login } from "./Pages/Login/Login.tsx";
 import { Register } from "./Pages/Register/Register.tsx";
+import { Dashboard } from "./Pages/Dashboard/Dashboard.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/dashboard",
-    element: <App />,
+    element: <Dashboard />,
     errorElement: <NotFound />,
   },
   {

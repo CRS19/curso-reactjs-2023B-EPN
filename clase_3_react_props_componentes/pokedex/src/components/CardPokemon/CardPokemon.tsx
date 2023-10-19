@@ -1,20 +1,23 @@
-import { IPokemon } from "../../constants/PokemonList";
+import { PokemonApiResponse } from "../../Pages/Dashboard/interfaces/Dashboard.interfaces";
 import {
   CardContainerStyles,
   ImgStyles,
   NameStyles,
 } from "./styles/CardPokemon.styles";
+import { useNavigate } from "react-router-dom";
 
-export const CardPokemon = ({ name, id, imgUrl, types }: IPokemon) => {
+export const CardPokemon = (pokemon: PokemonApiResponse) => {
+  const navigate = useNavigate();
+
   const getColor = (type: string) => {
     switch (type) {
-      case "Grass":
+      case "Grass".toUpperCase():
         return "#629869";
-      case "Fire":
+      case "Fire".toUpperCase():
         return "#E3866E";
-      case "Water":
+      case "Water".toUpperCase():
         return "#A4B4D6";
-      case "Bug":
+      case "Bug".toUpperCase():
         return "#FBE597";
       default:
         return "white";
@@ -25,13 +28,20 @@ export const CardPokemon = ({ name, id, imgUrl, types }: IPokemon) => {
     <div
       style={{
         ...CardContainerStyles,
-        backgroundColor: getColor(types[0]),
+        backgroundColor: getColor(pokemon.types[0].type.name.toUpperCase()),
+      }}
+      onClick={() => {
+        console.log("ve a la detalle", pokemon.id);
+        navigate(`/dashboard/${pokemon.id}`);
       }}
     >
-      <img style={ImgStyles} src={imgUrl} />
+      <img
+        style={ImgStyles}
+        src={pokemon.sprites.other.dream_world.front_default}
+      />
       <div style={NameStyles}>
-        <p>{id}</p>
-        <h3>{name}</h3>
+        <p>{pokemon.id}</p>
+        <h3>{pokemon.name}</h3>
       </div>
     </div>
   );
